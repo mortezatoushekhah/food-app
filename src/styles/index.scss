@@ -52,6 +52,7 @@ a {
             letter-spacing: 2px;
             text-transform: uppercase;
             position: relative;
+            font-size: 0.9em;
             &::before {
                 content: '';
                 display: inline-block;
@@ -121,6 +122,60 @@ a {
 
 .container {
     padding-inline: 10vw;
+}
+
+@keyframes sidebar {
+    from {width: 0;}
+    to {width: 40%}
+}
+@keyframes sidebarLink {
+    from {
+       transform: translateX(-150%);
+    }
+    to { 
+        transform: translateX(0)
+    }
+}
+.sidebar {
+    position: fixed;
+    background-color: var(--background-color);
+    box-shadow: 0 0 0 1000px rgba(0,0,0,0.2),
+    3px 0 5px var(--shadow-color);
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 40%;
+    animation-name: sidebar;
+    animation-duration: 0.4s;
+    .sidebar-link {
+        display: flex;
+        padding: 0.5em 1em;
+        margin-bottom: 1em;
+        border-left: 0.4em solid transparent;
+        animation-name: sidebarLink;
+        animation-duration: 0.3s;
+        &:nth-child(1){
+            animation-delay: .1s;
+        }
+        &:nth-child(2){
+            animation-delay: .2s;
+        }
+        &:nth-child(3){
+            animation-delay: .3s;
+        }
+        
+        &.active {
+            border-left: 0.3em solid var(--primary-color);
+        }
+        &:hover {
+            border-left: 0.3em solid var(--primary-color);
+            background-color: rgba(0,0,0,0.05);
+        }
+        svg {
+            width: 1.2em;
+            margin-right: 0.5em;
+        }
+    }
 }
 
 
