@@ -1,191 +1,220 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
-
-:root {
+:root{
     --background-color: #fff;
     --background-light: #fff;
     --shadow-color: rgba(0,0,0,0.2);
-    --primary-color: rgba(255,0,86);
-    --text-color: #0a0a0a;
+    --primary-color: rgb(255, 0, 86);
+    --text-color: #0A0A0A;
     --text-light: #575757;
     --font-size: 16px;
     --animation-speed: 1;
 }
 
-* {
+@function getAnimationDuration($duration: number) {
+    @return calc($duration * var(--animation-speed));
+}
+
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
+body{
     font-size: var(--font-size);
     font-family: 'Roboto', sans-serif;
+    padding-top: 55px;
+    background-color: var(--background-light);
 }
-
-a {
+a{
     text-decoration: none;
 }
+img{
+    object-fit: cover;
+}
 
-.navbar {
-    height: 55px;
-    box-shadow: 0 3px 6px var(--shadow-color);
-    background-color: var(--background-color);
-    color: var(--text-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .logo {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: var(--primary-color);
-        text-shadow: 0 1px 3px var(--shadow-color);
-        span {
-            color: var(--text-color);
-        }
-    }
-
-    .nav-links {
-        a {
-            margin-left: 1em;
-            color: var(--text-color);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            font-size: 0.9em;
-            &::before {
-                content: '';
-                display: inline-block;
-                height: 3px;
-                width: 100%;
-                background-color: var(--primary-color);
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                transform: scaleX(0);  
-                transition: transform calc(var(--animation-speed) * 0.2s ) ease-in-out;     
-            }
-            &:hover {
-                &::before {
-                    transform: scaleX(1);
-                }
-            }
-            &.active {
-                color: var(--primary-color);
-                font-weight: bold;
-            }
-        }
-    }
-    .sidebar-btn{
-        width: 35px;
-        height: 28px;
-        position: relative;
-        display: none;
-        .bar {
-            background-color: var(--text-color);
-            height: 6px;
-            width: 100%;
-            position: absolute;
-            transition: transform calc(var(--animation-speed) * 0.1s ) ease-in-out;
-            &:nth-child(1){
-                top: 0;
-            }
-            &:nth-child(2){
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            &:nth-child(3){
-                top: 100%;
-                transform: translateY(-100%);
-            }
-        }
-        &.active {
-            .bar {
-                transform-origin: center;
-                top: 50%;
-                &:nth-child(1){
-                    transform: rotate(45deg);
-                }
-                &:nth-child(2){
-                    transform: rotate(-45deg);
-                }
-                &:nth-child(3){
-                    transform: scale(0);
-                }
-                
-            }
-            
-        }
-        
+.btn{
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: .75em 1em;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    &:hover{
+        box-shadow: 0 1px 3px var(--shadow-color);
     }
 }
 
-.container {
+.custom-image{
+    background-color: red;
+    height: 0;
+    width: 100%;
+    position: relative;
+    img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@import "partials/navbar.scss";
+
+.section{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 3vw;
+    &.d-block{
+        display: block;
+    }
+    .title{
+        color: var(--text-color);
+        font-size: 2.5em;
+        margin-bottom: .25em;
+        font-weight: 900;
+    }
+    .info{
+        color: var(--text-light);
+        font-size: 1em;
+        letter-spacing: 1px;
+        line-height: 1.3;
+        margin-bottom: 1.25em;
+
+    }
+    .col{
+        width: 50%;
+    }
+}
+
+@import "partials/hero-section.scss";
+@import "partials/improve-section.scss";
+@import "partials/quote-section.scss";
+@import "partials/chiefs-section.scss";
+@import "partials/previous-searches.scss";
+@import "partials/recipes-section.scss";
+
+
+.options-container{
+    box-shadow: 0 5px 10px var(--shadow-color);
+    padding: 1em;
+    border-radius: 5px;
+    border-left: .5em solid var(--primary-color);
+    background-color: var(--background-light);
+    margin-top: 1em;
+    display: flex;
+    gap: 1em;
+    .option{
+        height: 3.5em;
+        width: 3.5em;
+        box-shadow: 0 3px 6px var(--shadow-color);
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.light{
+            background-color: #fff;
+        }
+        &.dark{
+            background-color: rgb(29, 29, 29);
+        }
+        .check{
+            height: 2.5em;
+            width: 2.5em;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            svg{
+                height: 1.5em;
+                width: 1.5em;
+            }
+        }
+    }
+    .btn span{
+        display: inline-block;
+        margin-left: .5em;
+    }
+}
+.d-block h2{
+    font-size: 1.75em;
+    color: var(--text-color)
+}
+
+@import "partials/footer.scss";
+
+
+
+.main{
+    padding-block: 3vw;
+}
+.container{
     padding-inline: 10vw;
 }
 
-@keyframes sidebar {
-    from {width: 0;}
-    to {width: 40%}
-}
-@keyframes sidebarLink {
-    from {
-       transform: translateX(-150%);
-    }
-    to { 
-        transform: translateX(0)
-    }
-}
-.sidebar {
-    position: fixed;
-    background-color: var(--background-color);
-    box-shadow: 0 0 0 1000px rgba(0,0,0,0.2),
-    3px 0 5px var(--shadow-color);
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 40%;
-    animation-name: sidebar;
-    animation-duration: 0.4s;
-    .sidebar-link {
-        display: flex;
-        padding: 0.5em 1em;
-        margin-bottom: 1em;
-        border-left: 0.4em solid transparent;
-        animation-name: sidebarLink;
-        animation-duration: 0.3s;
-        &:nth-child(1){
-            animation-delay: .1s;
-        }
-        &:nth-child(2){
-            animation-delay: .2s;
-        }
-        &:nth-child(3){
-            animation-delay: .3s;
-        }
-        
-        &.active {
-            border-left: 0.3em solid var(--primary-color);
-        }
-        &:hover {
-            border-left: 0.3em solid var(--primary-color);
-            background-color: rgba(0,0,0,0.05);
-        }
-        svg {
-            width: 1.2em;
-            margin-right: 0.5em;
-        }
-    }
-}
+@import "partials/animations.scss";
 
-
-@media screen and (max-width: 768px) {
-    .navbar {
-        .nav-links {
+@media screen and (max-width: 1280px){
+    .container{
+        padding-inline: 18vw;
+    }
+}
+@media screen and (max-width: 1050px){
+    .container{
+        padding-inline: 12vw;
+    }
+}
+@media screen and (max-width: 768px){
+    .navbar{
+        .nav-links{
             display: none;
         }
-        .sidebar-btn {
+        .sidebar-btn{
             display: block;
         }
+    }
+    .section{
+        .col{
+            width: 100%;
+            padding: 0 !important;
+            text-align: center;
+            margin-bottom: 2em;
+        }
+    }
+    .skill-item{
+        display: inline-block;
+        margin: .75em;
+    }
+    .section.improve-skills .btn{
+        display: block;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+    .chief-card{
+        box-shadow: 0 5px 10px var(--shadow-color);
+    }
+    .container{
+        padding-inline: 6vw;
+    }
+    .footer{
+        grid-template-columns: repeat(4, 1fr);
+        .footer-section:nth-child(1){
+            grid-column: span 4;
+        }
+        .footer-section:nth-child(2), .footer-section:nth-child(3){
+            grid-column: span 2;
+        }
+    }
+}
+@media screen and (max-width: 480px){
+    .container{
+        padding-inline: 3vw;
     }
 }
